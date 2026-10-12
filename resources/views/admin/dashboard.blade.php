@@ -31,7 +31,7 @@
         justify-content: center;
         font-size: 1.4rem;
     }
-    /* Card Profil Sekolah dengan Background Foto Gedung agar persis sejajar */
+
     .school-profile-bg {
         border-radius: 16px;
         overflow: hidden;
@@ -73,11 +73,10 @@
 
 <div class="content-wrapper">
 
-    <!-- Header Sambutan Modern -->
     <div class="dashboard-header d-flex align-items-center justify-content-between flex-wrap">
         <div>
             <h3 class="font-weight-bold mb-1">
-                Halo, {{ Auth::user()->username ?? 'Admin' }}! 
+                Halo, {{ Auth::user()->username ?? 'Admin' }}!
             </h3>
             <p class="mb-0 text-white-75" style="font-size: 0.95rem;">
                 Selamat datang kembali di Panel Administrator Sistem Informasi Akademik.
@@ -90,7 +89,6 @@
         </div>
     </div>
 
-    <!-- Bagian Atas: Card Profil Sekolah (Background Foto Gedung) & 4 Stat Cards -->
     @php
         // Mengambil Logo dari database profil sekolah
         $logoUrl = asset('assets/images/log.1.png');
@@ -104,7 +102,6 @@
             }
         }
 
-        // Mengambil Foto Gedung dari database profil sekolah
         $fotoGedungUrl = asset('assets/images/gedung.png');
         if (!empty($profilSekolah->foto)) {
             if (\Illuminate\Support\Str::startsWith($profilSekolah->foto, ['http://', 'https://'])) {
@@ -118,7 +115,6 @@
     @endphp
 
     <div class="row align-items-stretch mb-3">
-        <!-- Card Profil Sekolah dengan Background Foto Gedung Dinamis -->
         <div class="col-lg-4 d-flex grid-margin stretch-card mb-lg-0">
             <div class="school-profile-bg w-100" style="background: url('{{ $fotoGedungUrl }}'); background-size: cover; background-position: center;">
                 <div class="d-flex justify-content-between align-items-center w-100">
@@ -136,19 +132,11 @@
                     </h4>
                     <p class="text-white-50 small mb-0" style="font-size: 0.75rem;">Panel Administrator Resmi</p>
                 </div>
-
-                {{-- <div class="text-center">
-                    <span class="badge bg-dark bg-opacity-50 text-white border border-white border-opacity-10 px-3 py-1 rounded-pill" style="font-size: 0.7rem;">
-                        <i class="mdi mdi-database text-info me-1"></i> Data Terintegrasi Database
-                    </span>
-                </div> --}}
             </div>
         </div>
 
-        <!-- 4 Grid Statistik (Lebar 8 Kolom) -->
         <div class="col-lg-8">
             <div class="row">
-                <!-- Total Siswa -->
                 <div class="col-md-6 mb-3 stretch-card">
                     <div class="card card-modern p-1 border-start border-4 border-info w-100">
                         <div class="card-body d-flex align-items-center justify-content-between p-2">
@@ -164,7 +152,6 @@
                     </div>
                 </div>
 
-                <!-- Total Guru -->
                 <div class="col-md-6 mb-3 stretch-card">
                     <div class="card card-modern p-1 border-start border-4 border-primary w-100">
                         <div class="card-body d-flex align-items-center justify-content-between p-2">
@@ -180,7 +167,6 @@
                     </div>
                 </div>
 
-                <!-- Ekstrakurikuler -->
                 <div class="col-md-6 mb-md-0 mb-3 stretch-card">
                     <div class="card card-modern p-1 border-start border-4 border-success w-100">
                         <div class="card-body d-flex align-items-center justify-content-between p-2">
@@ -196,7 +182,6 @@
                     </div>
                 </div>
 
-                <!-- Total Berita -->
                 <div class="col-md-6 stretch-card">
                     <div class="card card-modern p-1 border-start border-4 border-warning w-100">
                         <div class="card-body d-flex align-items-center justify-content-between p-2">
@@ -215,7 +200,6 @@
         </div>
     </div>
 
-    <!-- Tabel Berita Terbaru -->
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card card-modern w-100">
@@ -225,7 +209,6 @@
                             <h5 class="font-weight-bold text-dark mb-1"><i class="mdi mdi-newspaper-variant-outline text-primary me-2"></i>Berita & Informasi Terbaru</h5>
                             <p class="text-muted small mb-0">Daftar 5 artikel atau pengumuman yang baru dipublikasikan</p>
                         </div>
-                        {{-- <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill font-weight-bold" style="font-size: 0.75rem;">Live Data</span> --}}
                     </div>
 
                     <div class="table-responsive">
@@ -274,6 +257,5 @@
             </div>
         </div>
     </div>
-
 </div>
 @endsection

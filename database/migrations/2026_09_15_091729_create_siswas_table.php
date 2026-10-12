@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nisn', 16)->unique();
             $table->string('nama_siswa');
             $table->string('kelas');
+            $table->unsignedBigInteger('jurusan_id')->nullable();
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->year('tahun_masuk');
             $table->timestamps();

@@ -6,7 +6,6 @@
         <div class="card shadow-sm border">
             <div class="card-body">
 
-                <!-- Header Card -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
                         <h4 class="card-title mb-1">{{ isset($guru) ? 'Edit Data Guru' : 'Tambah Data Guru' }}</h4>
@@ -14,21 +13,11 @@
                     </div>
                 </div>
 
-                <!-- Alert Error General -->
-                @if (session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-
-                <!-- Form Add / Edit -->
                 <form action="{{ route('admin.guru.save', isset($guru) ? Crypt::encrypt($guru->id) : '') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
-                        <!-- Nama Guru -->
                         <div class="col-md-6 mb-3">
                             <label for="nama_guru" class="form-label fw-semibold">Nama Guru <span
                                     class="text-danger">*</span></label>
@@ -40,7 +29,6 @@
                             @enderror
                         </div>
 
-                        <!-- NIP -->
                         <div class="col-md-6 mb-3">
                             <label for="nip" class="form-label fw-semibold">NIP <small
                                     class="text-muted">(Opsional)</small></label>
@@ -51,7 +39,6 @@
                             @enderror
                         </div>
 
-                        <!-- Kategori Pegawai (Sudah dibungkus col-md-6 agar sejajar rapi) -->
                         <div class="col-md-6 mb-3">
                             <label for="kategori" class="form-label fw-semibold">Kategori Pegawai <span class="text-danger">*</span></label>
                             <select class="form-select @error('kategori') is-invalid @enderror" id="kategori"
@@ -72,7 +59,6 @@
                             @enderror
                         </div>
 
-                        <!-- Mata Pelajaran -->
                         <div class="col-md-6 mb-3">
                             <label for="mapel" class="form-label fw-semibold">Mata Pelajaran <span
                                     class="text-danger">*</span></label>
@@ -84,7 +70,6 @@
                             @enderror
                         </div>
 
-                        <!-- Upload Foto -->
                         <div class="col-md-12 mb-3">
                             <label for="foto" class="form-label fw-semibold">Foto Guru <small
                                     class="text-muted">(Opsional)</small></label>
@@ -106,7 +91,6 @@
 
                     <hr class="my-4">
 
-                    <!-- Tombol Action -->
                     <div class="d-flex justify-content-end gap-2">
                          <a href="{{ route('admin.guru.index') }}"
                                         class="btn rounded-pill px-4 py-2 fw-medium d-inline-flex align-items-center justify-content-center"

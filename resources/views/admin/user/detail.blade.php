@@ -10,7 +10,6 @@
     <div class="card shadow-sm border-0 rounded-4 w-100">
       <div class="card-body p-4 p-md-5">
 
-        {{-- Header Halaman --}}
         <div class="d-flex align-items-center justify-content-between flex-wrap pb-3 mb-4 border-bottom">
           <div>
             <h3 class="card-title font-weight-bold text-dark mb-1">
@@ -26,7 +25,6 @@
           </div>
         </div>
 
-        {{-- Profil Pengguna --}}
         <div class="d-flex align-items-center p-3 mb-4 bg-light rounded-4 border">
 
           <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 shadow-sm" style="width: 75px; height: 75px; font-size: 30px; font-weight: bold;">
@@ -55,7 +53,6 @@
 
         </div>
 
-        {{-- Informasi Pengguna --}}
         <div class="border rounded-4 p-3">
 
           <h5 class="fw-bold text-dark border-bottom pb-3 mb-2">
@@ -106,14 +103,10 @@
                   <td>:</td>
                   <td>{{ $user->updated_at ? $user->updated_at->translatedFormat('d F Y, H:i') : '-' }}</td>
                 </tr>
-
               </tbody>
-
             </table>
           </div>
-
         </div>
-
       </div>
     </div>
   </div>

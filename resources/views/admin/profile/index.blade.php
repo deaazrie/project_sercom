@@ -15,10 +15,8 @@
   </div>
 
   <div class="row g-4">
-    {{-- Kolom Kiri: Logo & Kepala Sekolah --}}
     <div class="col-lg-5">
       <div class="card border-0 shadow-sm overflow-hidden rounded-4">
-        {{-- Background Foto Gedung Dinamis (Mengambil dari storage atau default) --}}
         <div class="text-center p-4"
           style="background: linear-gradient(rgba(21,55,99,.85), rgba(42,82,152,.85)), url('{{ !empty($profilSekolah->foto) ? asset('storage/' . $profilSekolah->foto) : asset('assets/images/gedung.png') }}') center/cover;">
 
@@ -36,7 +34,6 @@
         </div>
 
         <div class="card-body p-4">
-          {{-- Kepala Sekolah --}}
           <div class="border rounded-4 p-3 mb-4">
             <div class="d-flex align-items-center">
               <div class="rounded-circle bg-light text-primary d-flex align-items-center justify-content-center me-3 shadow-sm"
@@ -60,7 +57,6 @@
             </div>
           </div>
 
-          {{-- Informasi Tambahan --}}
           <div class="row g-3">
             <div class="col-6">
               <div class="bg-light rounded-4 p-3">
@@ -85,7 +81,6 @@
       </div>
     </div>
 
-    {{-- Kolom Kanan: Deskripsi & Visi Misi --}}
     <div class="col-lg-7">
       <div class="card border-0 shadow-sm rounded-4 mb-4">
         <div class="card-body p-4">

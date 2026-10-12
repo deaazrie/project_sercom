@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('jurusan', function (Blueprint $table) {
         $table->id();
         $table->string('nama_jurusan');
-        $table->string('kode_ikon')->default('bi-laptop'); // Untuk ikon Bootstrap Icons
+        $table->string('kode_ikon')->default('bi-laptop'); 
         $table->text('deskripsi');
         $table->timestamps();
     });

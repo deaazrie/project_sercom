@@ -13,35 +13,38 @@ class JurusanSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            [
-                'nama_jurusan' => 'Rekayasa Perangkat Lunak',
-                'kode_ikon' => 'bi-laptop',
-                'deskripsi' => 'Mendalami pemrograman web, aplikasi mobile, dan pengembangan perangkat lunak.',
-            ],
-            [
-                'nama_jurusan' => 'Teknik Komputer dan Jaringan',
-                'kode_ikon' => 'bi-cpu',
-                'deskripsi' => 'Mempelajari perakitan komputer, jaringan komputer, dan administrasi server.',
-            ],
-            [
-                'nama_jurusan' => 'Akuntansi dan Keuangan Lembaga',
-                'kode_ikon' => 'bi-cash-coin',
-                'deskripsi' => 'Belajar siklus akuntansi, perpajakan, dan pengoperasian software keuangan.',
-            ],
-            [
-                'nama_jurusan' => 'Bisnis Daring dan Pemasaran',
-                'kode_ikon' => 'bi-shop',
-                'deskripsi' => 'Mempelajari strategi pemasaran digital, e-commerce, dan pengelolaan bisnis retail.',
-            ],
-            [
-                'nama_jurusan' => 'Desain Komunikasi Visual',
-                'kode_ikon' => 'bi-palette',
-                'deskripsi' => 'Mengembangkan kreativitas dalam bidang desain grafis, ilustrasi, dan multimedia.',
-            ],
-        ];
+        [
+            'nama_jurusan' => 'Rekayasa Perangkat Lunak',
+            'kode_ikon' => 'mdi mdi-laptop',
+            'deskripsi' => 'Mendalami pemrograman web, aplikasi mobile, dan pengembangan perangkat lunak.',
+        ],
+        [
+            'nama_jurusan' => 'Teknik Komputer dan Jaringan',
+             'kode_ikon' => 'mdi mdi-desktop-tower',
+            'deskripsi' => 'Mempelajari perakitan komputer, jaringan komputer, dan administrasi server.',
+        ],
+        [
+            'nama_jurusan' => 'Akuntansi dan Keuangan Lembaga',
+            'kode_ikon' => 'mdi mdi-calculator',
+            'deskripsi' => 'Belajar siklus akuntansi, perpajakan, dan pengoperasian software keuangan.',
+        ],
+        [
+            'nama_jurusan' => 'Bisnis Daring dan Pemasaran',
+            'kode_ikon' => 'mdi mdi-shopping',
+            'deskripsi' => 'Mempelajari strategi pemasaran digital, e-commerce, dan pengelolaan bisnis retail.',
+        ],
+        [
+            'nama_jurusan' => 'Desain Komunikasi Visual',
+            'kode_ikon' => 'mdi mdi-palette',
+            'deskripsi' => 'Mengembangkan kreativitas dalam bidang desain grafis, ilustrasi, dan multimedia.',
+        ],
+    ];
 
         foreach ($data as $item) {
-            Jurusan::create($item);
+            Jurusan::updateOrCreate(
+                ['nama_jurusan' => $item['nama_jurusan']], // Patokan pencarian
+                $item
+            );
         }
     }
 }

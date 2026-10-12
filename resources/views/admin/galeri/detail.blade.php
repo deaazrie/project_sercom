@@ -5,7 +5,6 @@
   <div class="card shadow-sm border">
     <div class="card-body">
 
-      <!-- Header Card -->
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h4 class="card-title mb-1">Detail Galeri</h4>
@@ -17,7 +16,6 @@
       </div>
 
       <div class="row">
-        <!-- Kolom Preview File -->
         <div class="col-md-5 text-center mb-3 mb-md-0">
           @if($galeri->kategori == 'Foto')
             <img src="{{ asset('assets/images/' . $galeri->file) }}" alt="{{ $galeri->judul }}" class="img-fluid rounded border shadow-sm" style="max-height: 350px; object-fit: cover;" onerror="this.src='{{ asset('assets/admin/images/default-image.png') }}'">
@@ -29,7 +27,6 @@
           @endif
         </div>
 
-        <!-- Kolom Informasi Detail -->
         <div class="col-md-7">
           <h3 class="fw-bold text-dark mb-3">{{ $galeri->judul }}</h3>
 

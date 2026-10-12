@@ -6,7 +6,7 @@ use App\Models\Prestasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str; // <-- 1. Tambahkan use Str di sini
+use Illuminate\Support\Str; 
 
 class PrestasiController extends Controller
 {
@@ -14,7 +14,6 @@ class PrestasiController extends Controller
     {
         $query = Prestasi::query();
 
-        // Filter universal (bisa untuk tingkat atau tahun)
         if ($request->filled('filter_universal')) {
             $filter = $request->filter_universal;
             $query->where(function($q) use ($filter) {
@@ -25,7 +24,6 @@ class PrestasiController extends Controller
 
         $prestasi = $query->latest()->get();
 
-        // Data untuk dropdown filter
         $listTingkat = ['Sekolah', 'Kecamatan', 'Kabupaten/Kota', 'Provinsi', 'Nasional', 'Internasional'];
         $listTahun = Prestasi::select('tahun')->distinct()->orderBy('tahun', 'desc')->pluck('tahun');
 
@@ -43,9 +41,16 @@ class PrestasiController extends Controller
         return view('admin.prestasi.add-edit', compact('prestasi'));
     }
 
-    public function save(Request $request, $encryptedId = null)
+   public function save(Request $request, $encryptedId = null)
     {
-        $id = $encryptedId ? Crypt::decrypt($encryptedId) : null;
+        $id = null;
+        if ($encryptedId) {
+            try {
+                $id = Crypt::decrypt($encryptedId);
+            } catch (\Exception $e) {
+                return redirect()->route('admin.prestasi.index')->with('error', 'Data prestasi tidak ditemukan.');
+            }
+        }
 
         $request->validate([
             'nama_prestasi'  => 'required|string|max:100',
@@ -53,23 +58,33 @@ class PrestasiController extends Controller
             'tingkat'        => 'required|string',
             'juara'          => 'required|string|max:50',
             'tahun'          => 'required|digits:4',
-            'foto'           => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Maksimal 2MB
+            'foto'           => ($id ? 'nullable' : 'required') . '|image|mimes:jpeg,png,jpg|max:2048', // Maksimal 2MB
         ]);
+
+        $slug = Str::slug($request->nama_prestasi);
+        $slugExists = Prestasi::where('slug', $slug)
+            ->when($id, function ($query) use ($id) {
+                return $query->where('id', '!=', $id);
+            })
+            ->exists();
+
+        if ($slugExists) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Nama prestasi ini menghasilkan URL/slug yang sudah ada. Silakan gunakan nama prestasi yang berbeda.');
+        }
 
         $prestasi = $id ? Prestasi::findOrFail($id) : new Prestasi();
         $prestasi->nama_prestasi = $request->nama_prestasi;
-
-        // 2. Tambahkan generate slug otomatis dari nama_prestasi
-        $prestasi->slug = Str::slug($request->nama_prestasi);
-
+        $prestasi->slug = $slug;
         $prestasi->nama_siswa_tim = $request->nama_siswa_tim;
         $prestasi->tingkat = $request->tingkat;
         $prestasi->juara = $request->juara;
         $prestasi->tahun = $request->tahun;
 
-        // Handle Upload Foto/Sertifikat
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada file fisik lama
+
             if ($prestasi->foto && File::exists(public_path('uploads/prestasi/' . $prestasi->foto))) {
                 File::delete(public_path('uploads/prestasi/' . $prestasi->foto));
             }
@@ -77,7 +92,6 @@ class PrestasiController extends Controller
             $file = $request->file('foto');
             $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
 
-            // Pastikan folder tujuan ada
             $destinationPath = public_path('uploads/prestasi');
             if (!File::exists($destinationPath)) {
                 File::makeDirectory($destinationPath, 0755, true);
@@ -89,13 +103,12 @@ class PrestasiController extends Controller
 
         $prestasi->save();
 
-        return redirect()->route('admin.prestasi.index')->with('success', 'Data prestasi berhasil disimpan.');
+        return redirect()->route('admin.prestasi.index')->with('success', $id ? 'Data prestasi berhasil diperbarui.' : 'Data prestasi berhasil disimpan.');
     }
 
     public function show($slug)
     {
-        // $id = Crypt::decrypt($encryptedId);
-        // $prestasi = Prestasi::findOrFail($id);
+
         $prestasi = Prestasi::where('slug', $slug)->orWhere('id', $slug)->firstOrFail();
 
         return view('admin.prestasi.detail', compact('prestasi'));
@@ -106,7 +119,6 @@ class PrestasiController extends Controller
         $id = Crypt::decrypt($encryptedId);
         $prestasi = Prestasi::findOrFail($id);
 
-        // Hapus file foto jika ada
         if ($prestasi->foto && File::exists(public_path('uploads/prestasi/' . $prestasi->foto))) {
             File::delete(public_path('uploads/prestasi/' . $prestasi->foto));
         }

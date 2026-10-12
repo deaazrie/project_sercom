@@ -14,12 +14,9 @@ return new class extends Migration
         Schema::create('guru', function (Blueprint $table) {
             $table->id();
             $table->string('nama_guru');
-            // $table->string('nip', 15);
             $table->string('nip', 20)->nullable()->unique();
             $table->string('mapel');
             $table->string('kategori')->nullable();
-            // $table->enum('status', ['aktif', 'tidak_aktif'])->default('aktif');
-            // $table->string('foto', 100);
             $table->string('foto', 100)->nullable();
             $table->timestamps();
         });

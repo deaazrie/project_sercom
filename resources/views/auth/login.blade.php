@@ -6,18 +6,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>SMK Arunika Teknologi | Login</title>
+    {{-- <title>SMK Arunika Teknologi | Login</title> --}}
+    <title>{{ $profilSekolah->nama_sekolah ?? 'SMK Arunika Teknologi' }} | Login</title>
 
-    <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/mdi/css/materialdesignicons.min.css') }}">
 
-    <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('storage/' . $profilSekolah->logo) }}" type="image/png">
+
 
     <style>
         * {
@@ -53,16 +53,16 @@
            FOTO SEKOLAH
         ========================= */
 
-     .school-photo {
-    width: 55%;
-    min-height: 650px;
-    position: relative;
-    background-image:
-        linear-gradient(rgba(20, 49, 82, 0.2), rgba(20, 49, 82, 0.5)),
-        url("{{ !empty($profil->foto) ? asset('storage/' . $profil->foto) : asset('assets/images/arunik.png') }}");
-    background-size: cover;
-    background-position: center;
-}
+        .school-photo {
+            width: 55%;
+            min-height: 650px;
+            position: relative;
+            background-image:
+                linear-gradient(rgba(20, 49, 82, 0.2), rgba(20, 49, 82, 0.5)),
+                url("{{ !empty($profil->foto) ? asset('storage/' . $profil->foto) : asset('assets/images/arunik.png') }}");
+            background-size: cover;
+            background-position: center;
+        }
 
         .school-photo::after {
             content: "";
@@ -433,13 +433,9 @@
 
                         </button>
 
-
                         <div class="login-footer">
-
-                            Sistem Informasi SMK Arunika Teknologi
-
+                            Sistem Informasi {{ $profilSekolah->nama_sekolah ?? 'SMK Arunika Teknologi' }}
                         </div>
-
                     </form>
 
                 </div>

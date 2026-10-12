@@ -19,7 +19,6 @@
                     </div>
                 </div>
 
-                <!-- Form Filter -->
                 <form method="GET" action="{{ route('admin.prestasi.index') }}"
                     class="d-flex align-items-center flex-wrap gap-3 mb-4">
                     <div class="d-flex align-items-center gap-2">

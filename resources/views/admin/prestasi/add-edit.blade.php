@@ -24,8 +24,7 @@
                     <div class="mb-3">
                         <label for="nama_prestasi" class="form-label font-weight-bold text-dark">Nama Prestasi <span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('nama_prestasi') is-invalid @enderror"
-                            id="nama_prestasi" name="nama_prestasi" value="{{ old('nama_prestasi', $prestasi->nama_prestasi ?? '') }}"
-                            placeholder="Contoh: Juara 1 LKS Web Technologies">
+                            id="nama_prestasi" name="nama_prestasi" value="{{ old('nama_prestasi', $prestasi->nama_prestasi ?? '') }}">
                         @error('nama_prestasi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -34,8 +33,7 @@
                     <div class="mb-3">
                         <label for="nama_siswa_tim" class="form-label font-weight-bold text-dark">Nama Siswa / Tim <span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('nama_siswa_tim') is-invalid @enderror"
-                            id="nama_siswa_tim" name="nama_siswa_tim" value="{{ old('nama_siswa_tim', $prestasi->nama_siswa_tim ?? '') }}"
-                            placeholder="Contoh: Dea Azri Fauziah">
+                            id="nama_siswa_tim" name="nama_siswa_tim" value="{{ old('nama_siswa_tim', $prestasi->nama_siswa_tim ?? '') }}">
                         @error('nama_siswa_tim')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -62,8 +60,7 @@
                     <div class="mb-3">
                         <label for="juara" class="form-label font-weight-bold text-dark">Juara <span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('juara') is-invalid @enderror"
-                            id="juara" name="juara" value="{{ old('juara', $prestasi->juara ?? '') }}"
-                            placeholder="Contoh: Juara 1 / Medali Emas">
+                            id="juara" name="juara" value="{{ old('juara', $prestasi->juara ?? '') }}">
                         @error('juara')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -80,7 +77,6 @@
                         @enderror
                     </div>
 
-                    {{-- Input Upload Foto --}}
                     <div class="mb-4">
                         <label for="foto" class="form-label font-weight-bold text-dark">Foto / Dokumen Sertifikat</label>
                         @if(isset($prestasi) && $prestasi->foto)
@@ -96,14 +92,14 @@
                         @enderror
                     </div>
 
-                    <div class="d-flex justify-content-end gap-2 pt-3 border-top">
-                         <a href="{{ route('admin.prestasi.index') }}"
-                                    class="btn rounded-pill px-4 py-2 fw-medium d-inline-flex align-items-center justify-content-center"
-                                    style="background-color: #eef2ff; color: #4f46e5; border: 1px solid #c7d2fe; height: 42px;">
-                                    Batal
-                         </a>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="mdi mdi-content-save"></i> Simpan
+                    <div class="d-flex align-items-center justify-content-end gap-2 pt-4 mt-4 border-top">
+                        <a href="{{ route('admin.prestasi.index') }}"
+                            class="btn rounded-pill px-4 py-2 fw-medium d-inline-flex align-items-center justify-content-center text-decoration-none"
+                            style="background-color: #eef2ff; color: #4f46e5; border: 1px solid #c7d2fe; height: 42px;">
+                            Batal
+                        </a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 py-2 d-inline-flex align-items-center justify-content-center" style="height: 42px;">
+                            <i class="mdi mdi-content-save me-1"></i> Simpan
                         </button>
                     </div>
 

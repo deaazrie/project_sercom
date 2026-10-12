@@ -14,7 +14,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            /* padding-top: 76px; */
         }
 
         .section-samar {
@@ -163,7 +162,6 @@
             padding-bottom: 50px !important;
         }
 
-        /* === STYLE KHUSUS CARD JURUSAN === */
         .card-jurusan {
             background-color: #ffffff;
             transition: all 0.3s ease-in-out;
@@ -173,10 +171,8 @@
         .card-jurusan:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1) !important;
-            /* border-top: 4px solid #1e3a8a !important; */
         }
 
-        /* === STYLE KHUSUS CARD GURU === */
         .card-guru {
             background-color: #ffffff;
             transition: all 0.3s ease-in-out;
@@ -318,7 +314,6 @@
 
 <body>
 
-    <!-- Navbar Fixed Top -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
@@ -362,7 +357,6 @@
         </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero text-white">
         <div class="hero-shape shape-1"></div>
         <div class="hero-shape shape-2"></div>
@@ -397,7 +391,6 @@
         </div>
     </section>
 
-    <!-- Stats -->
     <section class="stats">
         <div class="container">
             <div class="row g-3">
@@ -434,7 +427,6 @@
         </div>
     </section>
 
-    <!-- Sambutan -->
     <section class="py-5" id="sambutan">
         <div class="container">
             <div class="row align-items-center g-4">
@@ -482,7 +474,6 @@
         </div>
     </section>
 
-    <!-- Program Keahlian -->
     <section class="py-5 section-samar" id="jurusan">
         <div class="container py-4">
 
@@ -502,7 +493,6 @@
             <div class="swiper jurusanSwiper">
                 <div class="swiper-wrapper">
 
-                    <!-- 1. RPL -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-jurusan h-100 shadow-sm border-0 rounded-4 p-4">
                             <div class="card-body p-0">
@@ -526,7 +516,6 @@
                         </div>
                     </div>
 
-                    <!-- 2. TKJ -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-jurusan h-100 shadow-sm border-0 rounded-4 p-4">
                             <div class="card-body p-0">
@@ -550,7 +539,6 @@
                         </div>
                     </div>
 
-                    <!-- 3. DKV -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-jurusan h-100 shadow-sm border-0 rounded-4 p-4">
                             <div class="card-body p-0">
@@ -574,7 +562,6 @@
                         </div>
                     </div>
 
-                    <!-- 4. Broadcasting -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-jurusan h-100 shadow-sm border-0 rounded-4 p-4">
                             <div class="card-body p-0">
@@ -598,7 +585,6 @@
                         </div>
                     </div>
 
-                    <!-- 5. Akuntansi -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-jurusan h-100 shadow-sm border-0 rounded-4 p-4">
                             <div class="card-body p-0">
@@ -622,7 +608,6 @@
                         </div>
                     </div>
 
-                    <!-- 6. Pemasaran -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-jurusan h-100 shadow-sm border-0 rounded-4 p-4">
                             <div class="card-body p-0">
@@ -646,7 +631,6 @@
                         </div>
                     </div>
 
-                    <!-- 7. Perhotelan -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-jurusan h-100 shadow-sm border-0 rounded-4 p-4">
                             <div class="card-body p-0">
@@ -670,7 +654,6 @@
                         </div>
                     </div>
 
-                    <!-- 8. Otomotif -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-jurusan h-100 shadow-sm border-0 rounded-4 p-4">
                             <div class="card-body p-0">
@@ -708,7 +691,6 @@
         </div>
     </section>
 
-    <!-- Dewan Guru & Staf Pengajar -->
     <section class="py-5 bg-light" id="guru">
         <div class="container py-4">
 
@@ -728,7 +710,6 @@
             <div class="swiper guruSwiper">
                 <div class="swiper-wrapper">
 
-                    <!-- Guru 1 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-guru h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 
@@ -749,7 +730,6 @@
                         </div>
                     </div>
 
-                    <!-- Guru 2 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-guru h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 
@@ -770,7 +750,6 @@
                         </div>
                     </div>
 
-                    <!-- Guru 3 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-guru h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 
@@ -791,7 +770,6 @@
                         </div>
                     </div>
 
-                    <!-- Guru 4 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-guru h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 
@@ -812,7 +790,6 @@
                         </div>
                     </div>
 
-                    <!-- Guru 5 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-guru h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 
@@ -833,7 +810,6 @@
                         </div>
                     </div>
 
-                    <!-- Guru 6 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-guru h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 
@@ -854,7 +830,6 @@
                         </div>
                     </div>
 
-                    <!-- Guru 7 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-guru h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 
@@ -875,7 +850,6 @@
                         </div>
                     </div>
 
-                    <!-- Guru 8 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-guru h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 
@@ -911,7 +885,6 @@
         </div>
     </section>
 
-    <!-- Prestasi -->
     <section class="py-5 section-samar" id="prestasi">
         <div class="container py-4">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -926,7 +899,6 @@
             <div class="swiper prestasiSwiper">
                 <div class="swiper-wrapper">
 
-                    <!-- Prestasi 1 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-prestasi h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                             <div class="prestasi-img-wrapper">
@@ -942,7 +914,6 @@
                         </div>
                     </div>
 
-                    <!-- Prestasi 2 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-prestasi h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                             <div class="prestasi-img-wrapper">
@@ -958,7 +929,6 @@
                         </div>
                     </div>
 
-                    <!-- Prestasi 3 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-prestasi h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                             <div class="prestasi-img-wrapper">
@@ -974,7 +944,6 @@
                         </div>
                     </div>
 
-                    <!-- Prestasi 4 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-prestasi h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                             <div class="prestasi-img-wrapper">
@@ -990,7 +959,6 @@
                         </div>
                     </div>
 
-                    <!-- Prestasi 5 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-prestasi h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                             <div class="prestasi-img-wrapper">
@@ -1006,7 +974,6 @@
                         </div>
                     </div>
 
-                    <!-- Prestasi 6 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-prestasi h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                             <div class="prestasi-img-wrapper">
@@ -1035,7 +1002,6 @@
         </div>
     </section>
 
-    <!-- eskul 1 -->
     <section class="py-5 bg-light" id="ekstrakurikuler">
         <div class="container py-4">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -1049,7 +1015,6 @@
             <div class="swiper ekstrakurikulerSwiper">
                 <div class="swiper-wrapper">
 
-                    <!-- eskul 1 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-ekstrakurikuler h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                             <div class="ekstrakurikuler-img-wrapper overflow-hidden">
@@ -1157,7 +1122,6 @@
         </div>
     </section>
 
-    <!-- Berita -->
     <section class="py-5 section-samar" id="berita">
         <div class="container py-4">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -1171,7 +1135,6 @@
             <div class="swiper beritaSwiper">
                 <div class="swiper-wrapper">
 
-                    <!-- Berita 1 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-berita h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                             <div class="berita-img-wrapper">
@@ -1187,7 +1150,6 @@
                         </div>
                     </div>
 
-                    <!-- Berita 2 -->
                     <div class="swiper-slide h-auto">
                         <div class="card card-berita h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                             <div class="berita-img-wrapper">
@@ -1660,3 +1622,18 @@
 </body>
 
 </html>
+
+ <section class="py-5 section-samar" id="pembuat">
+        <div class="container py-4">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="text-primary fw-bold">Biodata Pembuat</span>
+                <h2 class="fw-bold text-dark mb-2">Biodata Lengkap Pembuat</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">
+                    Halaman Ini Menunjukkan Biodata Pembuat Agar User Bisa Melihat Siapa pembuatnya
+                </p>
+            </div>
+
+            
+
+        </div>
+    </section>

@@ -6,26 +6,23 @@
 <main class="py-5 mt-4">
     <div class="container py-4">
 
-        <!-- Header Judul Halaman -->
         <div class="text-center mb-5" data-aos="fade-up">
             <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-semibold mb-2">Tentang Kami</span>
             <h1 class="fw-bold text-dark mb-2">Profil Sekolah</h1>
             <p class="text-muted mx-auto" style="max-width: 600px;">
-                Mengenal lebih dekat sejarah, visi, misi, dan pimpinan SMK Arunika Teknologi.
+                Mengenal lebih dekat sejarah, visi, misi, dan pimpinan Sekolah.
             </p>
         </div>
 
-        <!-- Bagian Pimpinan & Sambutan -->
         <div class="card border-0 shadow-sm rounded-4 p-4 p-lg-5 mb-5 bg-white" data-aos="fade-up">
             <div class="row align-items-center g-5">
-                <!-- Kolom Foto Kepala Sekolah -->
                 <div class="col-lg-4 text-center">
                     <div class="position-relative d-inline-block w-100">
                         <img src="{{ !empty($profilSekolah->foto_kepala_sekolah) ? asset('storage/' . $profilSekolah->foto_kepala_sekolah) : asset('assets/images/kepala_sekol.jpg') }}"
                              class="img-fluid rounded-4 shadow-sm w-100 object-fit-cover" style="max-height: 380px;" alt="Kepala Sekolah">
                     </div>
                 </div>
-                <!-- Kolom Teks Deskripsi -->
+
                 <div class="col-lg-8">
                     <span class="text-primary fw-bold text-uppercase small tracking-wide">Kepala Sekolah</span>
                     <h2 class="fw-bold text-dark mb-3">{{ $profilSekolah->kepala_sekolah ?? 'Dr. H. Ahmad Firmansyah, M.Pd.' }}</h2>
@@ -37,9 +34,8 @@
             </div>
         </div>
 
-        <!-- Visi & Misi -->
         <div class="row g-4 mb-5">
-            <!-- Visi -->
+
             <div class="col-lg-6" data-aos="fade-up">
                 <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-primary text-white">
                     <div class="d-flex align-items-center mb-3">
@@ -53,7 +49,7 @@
                     </p>
                 </div>
             </div>
-            <!-- Misi -->
+
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white">
                     <div class="d-flex align-items-center mb-3">
@@ -69,7 +65,6 @@
             </div>
         </div>
 
-        <!-- Informasi Singkat Sekolah -->
         <div class="card border-0 shadow-sm rounded-4 p-4 p-lg-5 bg-light" data-aos="fade-up">
             <h4 class="fw-bold text-dark mb-4 pb-2 border-bottom">Informasi Singkat Sekolah</h4>
             <div class="row g-4">

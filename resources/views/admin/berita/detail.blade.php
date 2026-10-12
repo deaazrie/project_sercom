@@ -10,7 +10,6 @@
             <div class="card shadow-sm border-0 rounded-4 w-100">
                 <div class="card-body p-4 p-md-5">
 
-                    {{-- Header Halaman --}}
                     <div class="d-flex align-items-center justify-content-between flex-wrap pb-3 mb-4 border-bottom">
                         <div>
                             <h3 class="card-title font-weight-bold text-dark mb-1">
@@ -24,7 +23,6 @@
                         </a>
                     </div>
 
-                    {{-- Gambar Berita --}}
                     <div class="text-center mb-4">
                         @if (!empty($berita->gambar))
                             <img src="{{ asset('assets/images/' . $berita->gambar) }}" alt="{{ $berita->judul }}"
@@ -38,7 +36,6 @@
                         @endif
                     </div>
 
-                    {{-- Detail Konten --}}
                     <div class="border rounded-4 p-4">
 
                         <h3 class="fw-bold text-dark mb-2">{{ $berita->judul }}</h3>

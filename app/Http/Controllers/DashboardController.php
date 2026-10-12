@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Dashboard;
 use App\Http\Requests\StoreDashboardRequest;
 use App\Http\Requests\UpdateDashboardRequest;
-
-// IMPORT MODEL (Lengkap dengan Prestasi & Galeri)
 use App\Models\Siswa;
 use App\Models\Guru;
 use App\Models\Ekstrakurikuler;
 use App\Models\Berita;
 use App\Models\Galeri;
-use App\Models\Prestasi; // <-- Model Prestasi sudah ditambahkan di sini
+use App\Models\Prestasi;
 use App\Models\ProfileSekolah;
 
 class DashboardController extends Controller
@@ -31,8 +29,8 @@ class DashboardController extends Controller
         return view('layouts.landing', [
             'title'         => 'Beranda Website Sekolah',
             'profilSekolah' => $profilSekolah,
-            'prestasi'      => $prestasi, // <-- Dikirim ke landing.index
-            'galeri'        => $galeri,   // <-- Dikirim ke landing.index
+            'prestasi'      => $prestasi,
+            'galeri'        => $galeri,
         ]);
     }
 

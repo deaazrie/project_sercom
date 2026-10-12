@@ -15,12 +15,10 @@ return new class extends Migration
         Schema::create('berita', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            // $table->string('slug')->unique();
             $table->string('slug')->nullable()->unique();
             $table->text('isi');
             $table->string('status')->default('draft');
             $table->date('tanggal');
-            // $table->string('gambar', 100);
             $table->string('gambar', 100)->nullable();
             $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->timestamps();

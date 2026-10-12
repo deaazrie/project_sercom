@@ -13,8 +13,6 @@ class AuthController extends Controller
      */
     public function index()
     {
-        // Auth::logout();
-        // return view('auth.login');
         $profil = DB::table('profil_sekolah')->first();
         return view('auth.login', compact('profil'));
     }
@@ -22,9 +20,7 @@ class AuthController extends Controller
     /**
      * Memproses data login (Submit Form)
      */
- /**
-     * Memproses data login (Submit Form)
-     */
+
     public function processLogin(Request $request)
     {
         $credentials = $request->validate(

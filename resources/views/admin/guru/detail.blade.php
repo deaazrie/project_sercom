@@ -10,7 +10,6 @@
     <div class="card shadow-sm border-0 rounded-4 w-100">
       <div class="card-body p-4 p-md-5">
 
-        {{-- Header Halaman --}}
         <div class="d-flex align-items-center justify-content-between flex-wrap pb-3 mb-4 border-bottom">
           <div>
             <h3 class="card-title font-weight-bold text-dark mb-1">
@@ -24,7 +23,6 @@
           </a>
         </div>
 
-        {{-- Profil Guru --}}
         <div class="d-flex align-items-center p-3 mb-4 bg-light rounded-4 border">
 
           @if ($guru->foto && file_exists(public_path('storage/' . $guru->foto)))
@@ -43,7 +41,6 @@
 
         </div>
 
-        {{-- Informasi Guru --}}
         <div class="border rounded-4 p-3">
 
           <h5 class="fw-bold text-dark border-bottom pb-3 mb-2">
@@ -92,7 +89,6 @@
             </table>
           </div>
 
-          {{-- Tombol Aksi --}}
           <div class="mt-3 pt-3 border-top d-flex gap-2">
 
             <a href="{{ route('admin.guru.add-edit', Crypt::encrypt($guru->id)) }}" class="btn btn-warning btn-sm text-white rounded-pill px-3">

@@ -20,8 +20,7 @@
             <i class="mdi mdi-arrow-left me-1"></i> Kembali
           </a>
         </div>
-
-        {{-- Preview Foto di Detail --}}
+        
         @if($prestasi->foto && file_exists(public_path('uploads/prestasi/' . $prestasi->foto)))
             <div class="text-center mb-4 p-3 bg-light rounded-4 border">
                 <img src="{{ asset('uploads/prestasi/' . $prestasi->foto) }}" alt="Foto Prestasi" class="img-fluid rounded shadow-sm" style="max-height: 300px;">

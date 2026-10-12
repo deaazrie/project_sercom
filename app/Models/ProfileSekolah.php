@@ -9,11 +9,9 @@ class ProfileSekolah extends Model
 {
     use HasFactory;
 
-    // Menyesuaikan dengan nama tabel asli di database
     protected $table = 'profil_sekolah';
     protected $primaryKey = 'id';
 
-    // Daftar kolom yang diizinkan untuk diisi/di-update massal
     protected $fillable = [
         'nama_sekolah',
         'kepala_sekolah',

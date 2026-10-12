@@ -8,7 +8,6 @@
             <div class="card shadow-sm border-0 rounded-4 w-100">
                 <div class="card-body p-4 p-md-5">
 
-                    {{-- Header --}}
                     <div class="d-flex align-items-center justify-content-between flex-wrap pb-3 mb-4 border-bottom">
                         <div>
                             <h3 class="card-title font-weight-bold text-dark mb-1">
@@ -30,10 +29,8 @@
 
                         <div class="row g-4">
 
-                            {{-- Kolom Kiri --}}
                             <div class="col-lg-5">
 
-                                {{-- Informasi Utama --}}
                                 <div class="border rounded-4 p-4 mb-4">
                                     <h5 class="fw-bold text-dark border-bottom pb-3 mb-4">
                                         <i class="mdi mdi-information-outline text-info me-2"></i>Informasi Utama
@@ -75,7 +72,6 @@
                                     </div>
                                 </div>
 
-                                {{-- Media --}}
                                 <div class="border rounded-4 p-4">
                                     <h5 class="fw-bold text-dark border-bottom pb-3 mb-4">
                                         <i class="mdi mdi-image-multiple-outline text-info me-2"></i>Media Sekolah
@@ -97,7 +93,6 @@
                                         </small>
                                     </div>
 
-                                    {{-- Foto Kepala Sekolah --}}
                                     <div class="mb-0">
                                         <label for="foto_kepala_sekolah" class="form-label fw-semibold">Foto Kepala Sekolah</label>
                                         @if(!empty($profilSekolah->foto_kepala_sekolah))
@@ -114,10 +109,8 @@
 
                             </div>
 
-                            {{-- Kolom Kanan --}}
                             <div class="col-lg-7">
 
-                                {{-- Deskripsi --}}
                                 <div class="border rounded-4 p-4 mb-4">
                                     <h5 class="fw-bold text-dark border-bottom pb-3 mb-4">
                                         <i class="mdi mdi-text-box-outline text-info me-2"></i>Deskripsi Sekolah
@@ -130,7 +123,6 @@
                                     </div>
                                 </div>
 
-                                {{-- Visi --}}
                                 <div class="border rounded-4 p-4 mb-4">
                                     <h5 class="fw-bold text-dark border-bottom pb-3 mb-4">
                                         <i class="mdi mdi-eye-outline text-info me-2"></i>Visi Sekolah
@@ -142,7 +134,6 @@
                                     </div>
                                 </div>
 
-                                {{-- Misi --}}
                                 <div class="border rounded-4 p-4 mb-4">
                                     <h5 class="fw-bold text-dark border-bottom pb-3 mb-4">
                                         <i class="mdi mdi-target text-info me-2"></i>Misi Sekolah
@@ -154,7 +145,6 @@
                                     </div>
                                 </div>
 
-                                {{-- Tombol Aksi --}}
                                 <div class="d-flex justify-content-end gap-2 pt-3 border-top">
                                     <a href="{{ route('admin.profile') }}"
                                         class="btn rounded-pill px-4 py-2 fw-medium d-inline-flex align-items-center justify-content-center"

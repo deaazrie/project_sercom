@@ -9,8 +9,7 @@ class Jurusan extends Model
 {
     use HasFactory;
 
-    protected $table = 'jurusan'; // Menyesuaikan nama tabel di database
-
+    protected $table = 'jurusan'; 
     protected $fillable = [
         'nama_jurusan',
         'kode_ikon',

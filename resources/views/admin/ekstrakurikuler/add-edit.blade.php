@@ -31,7 +31,6 @@
                             <input type="text" name="nama_ekskul"
                                 class="form-control @error('nama_ekskul') is-invalid @enderror"
                                 value="{{ old('nama_ekskul', $ekstrakurikuler->nama_ekskul ?? '') }}"
-                                placeholder="Contoh: Paskibra, PMR" required>
                             @error('nama_ekskul')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -60,7 +59,6 @@
                             <input type="text" name="jadwal_latihan"
                                 class="form-control @error('jadwal_latihan') is-invalid @enderror"
                                 value="{{ old('jadwal_latihan', $ekstrakurikuler->jadwal_latihan ?? '') }}"
-                                placeholder="Contoh: Kamis, 15:30 WIB" required>
                             @error('jadwal_latihan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

@@ -12,6 +12,8 @@ use App\Models\Guru;
 use App\Models\Ekstrakurikuler;
 use App\Models\Berita;
 use App\Models\Siswa;
+use App\Models\Pembuat;
+
 
 class LandingController extends Controller
 {
@@ -24,6 +26,15 @@ class LandingController extends Controller
         $guru          = Guru::all();
         $berita        = Berita::all();
         $ekstrakurikuler = Ekstrakurikuler::all();
+        $pembuat = [
+            'nama' => 'Dea Azri Fauziah',
+            'kelas' => 'XII RPL 1',
+            'sekolah' => 'SMK YPC TASIKMALAYA',
+            'Hobi' => 'Memasak',
+            'Tempat Tanggal Lahir' => 'Bandung 08 Januari 2008',
+            'deskripsi' => 'Saya Merupakan Siswi SMK YPC Tasikmalaya Jurusan Rekayasa Perangkat Lunak',
+            'foto' => 'clara.jpg'
+        ];
 
         $totalSiswa = Siswa::count();
         $totalGuru = Guru::count();
@@ -33,7 +44,7 @@ class LandingController extends Controller
         return view('landing.index', compact(
             'profilSekolah', 'prestasi', 'galeri', 'jurusan', 'guru',
             'ekstrakurikuler', 'berita', 'totalSiswa', 'totalGuru',
-            'totalPrestasi', 'totalJurusan'
+            'totalPrestasi', 'totalJurusan', 'pembuat'
         ));
     }
 
@@ -41,6 +52,21 @@ class LandingController extends Controller
     {
         $profilSekolah = ProfileSekolah::first();
         return view('landing.profil', compact('profilSekolah'));
+    }
+
+   public function pembuat()
+    {
+           $pembuat = [
+            'nama' => 'Dea Azri Fauziah',
+            'kelas' => 'XII RPL 1',
+            'sekolah' => 'SMK YPC TASIKMALAYA',
+            'Hobi' => 'Memasak',
+            'Tempat Tanggal Lahir' => 'Bandung 08 Januari 2008',
+            'deskripsi' => 'Saya Merupakan Siswi SMK YPC Tasikmalaya Jurusan Rekayasa Perangkat Lunak',
+            'foto' => 'clara.jpg'
+        ];
+
+        return view('landing.pembuat', compact('pembuat'));
     }
 
     public function jurusanIndex()
@@ -77,35 +103,13 @@ class LandingController extends Controller
         }
     }
 
-    // public function prestasiIndex()
-    // {
-    //     $prestasi = Prestasi::all();
-    //     return view('landing.prestasi', compact('prestasi'));
-    // }
-
-    // public function prestasiDetail($encryptedId)
-    // {
-    //     try {
-    //         try {
-    //             $id = Crypt::decryptString($encryptedId);
-    //         } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
-    //             $id = $encryptedId;
-    //         }
-
-    //         $prestasi = Prestasi::findOrFail($id);
-    //         return view('landing.detail-prestasi', compact('prestasi'));
-    //     } catch (\Exception $e) {
-    //         return redirect()->route('landing.prestasi.index');
-    //     }
-    // }
 
    public function prestasiIndex()
     {
-        $prestasi = Prestasi::latest()->paginate(9);
+        $prestasi = Prestasi::latest()->get();
         return view('landing.prestasi', compact('prestasi'));
     }
 
-    // Menggunakan slug untuk halaman detail prestasi publik
     public function prestasiDetail($slug)
     {
         $prestasi = Prestasi::where('slug', $slug)->firstOrFail();
@@ -140,7 +144,6 @@ class LandingController extends Controller
         return view('landing.berita', compact('berita'));
     }
 
-    // Menggunakan slug untuk halaman detail berita publik
     public function detailBerita($slug)
     {
         $berita = Berita::where('slug', $slug)->firstOrFail();
@@ -168,4 +171,5 @@ class LandingController extends Controller
             return redirect()->route('landing.galeri.index');
         }
     }
+    
 }

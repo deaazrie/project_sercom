@@ -2,7 +2,6 @@
 @section('title', 'Beranda')
 @section('content')
 
-    <!-- Hero -->
     <section class="hero text-white position-relative py-5"
         style="background-image: linear-gradient(90deg, #173b8f 0%, rgba(23, 59, 143, 0.98) 40%, rgba(23, 59, 143, 0.8) 70%, rgba(23, 59, 143, 0.4) 100%), url('{{ !empty($profilSekolah->foto) ? asset('storage/' . $profilSekolah->foto) : asset('assets/images/gedung.png') }}');">
 
@@ -16,7 +15,7 @@
                     <span class="badge bg-warning text-dark mb-3">Terakreditasi A</span>
 
                     <h1 class="fw-bold mb-4">
-                        {{ $profilSekolah->slogan ?? 'Menerangi Masa Depan dengan Kompetensi' }}
+                        {{ $profilSekolah->nama_sekolah ?? 'SMK Arunika Teknologi' }}
                     </h1>
 
                     <p class="lead mb-4">
@@ -28,7 +27,6 @@
         </div>
     </section>
 
-    <!-- Stats -->
     <section class="stats py-3" style="margin-top: -60px; position: relative; z-index: 10;">
         <div class="container">
             <div class="row g-3">
@@ -60,7 +58,6 @@
         </div>
     </section>
 
-    <!-- Sambutan -->
     <section class="py-5" id="sambutan">
         <div class="container">
             <div class="row align-items-center g-4">
@@ -100,7 +97,6 @@
         </div>
     </section>
 
-    <!-- Program Keahlian -->
     <section class="py-5 section-samar" id="jurusan">
         <div class="container py-4">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -116,17 +112,14 @@
                 <div class="swiper-wrapper">
 
                     @foreach ($jurusan as $item)
-                        <!-- Slide Item -->
                         <div class="swiper-slide h-auto">
-                            <!-- Ditambah d-block h-100 dan Crypt::encryptString agar bisa diklik penuh & aman -->
                             <a href="{{ route('landing.jurusan.detail', Crypt::encryptString($item->id)) }}"
                                 class="text-decoration-none d-block h-100">
                                 <div class="card card-jurusan h-100 shadow-sm border-0 rounded-4 p-4 transition-card">
                                     <div class="card-body p-0">
                                         <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-3 mb-4"
                                             style="width: 60px; height: 60px; font-size: 1.8rem;">
-                                            <!-- Menampilkan icon dari database, atau icon default jika kosong -->
-                                            <i class="{{ $item->icon ?? 'bi bi-laptop' }}"></i>
+                                            <i class="{{ $item->kode_ikon ?? 'mdi mdi-laptop' }}"></i>
                                         </div>
                                         <h5 class="fw-bold text-dark mb-3">{{ $item->nama_jurusan }}</h5>
                                         <p class="text-muted small mb-0">
@@ -137,12 +130,9 @@
                             </a>
                         </div>
                     @endforeach
-
                 </div>
-
                 <div class="swiper-pagination"></div>
                 <div class="text-center mt-4">
-                    <!-- Tombol Lihat Semua -->
                     <a href="{{ route('landing.jurusan.index') }}" class="btn btn-outline-primary rounded-pill px-4 py-2">
                         Lihat Semua
                         <i class="bi bi-arrow-right ms-2"></i>
@@ -152,8 +142,6 @@
         </div>
     </section>
 
-    <!-- Dewan Guru & Staf Pengajar -->
-    <!-- Dewan Guru & Staf Pengajar -->
     <section class="py-5 bg-light" id="guru">
         <div class="container py-4">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -176,7 +164,7 @@
                                 <div class="card card-guru h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                                     <div class="guru-img-wrapper overflow-hidden">
                                         @if (!empty($item->foto))
-                                            <img src="{{ asset('storage/' . $item->foto) }}"
+                                            <img src="{{ asset('assets/images/' . $item->foto) }}"
                                                 alt="{{ $item->nama ?? ($item->nama_guru ?? $item->name) }}">
                                         @endif
                                     </div>
@@ -205,7 +193,6 @@
         </div>
     </section>
 
-    <!-- Prestasi -->
     <section class="py-5 section-samar" id="prestasi">
         <div class="container py-4">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -254,7 +241,6 @@
         </div>
     </section>
 
-    <!-- Ekstrakurikuler -->
     <section class="py-5 bg-light" id="ekstrakurikuler">
         <div class="container py-4">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -273,7 +259,6 @@
                                 class="text-decoration-none d-block h-100 position-relative" style="z-index: 5;">
                                 <div class="card card-ekstrakurikuler h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 
-                                    {{-- Hanya render jika gambar ada dan panjang nama file lebih dari 3 karakter (menghindari inisial huruf seperti 'B' atau 'R') --}}
                                     @if (!empty($item->gambar) && trim($item->gambar) !== '' && strlen(trim($item->gambar)) > 3)
                                         <div class="ekstrakurikuler-img-wrapper overflow-hidden bg-white text-center d-flex align-items-center justify-content-center"
                                             style="height: 220px;">
@@ -306,7 +291,6 @@
         </div>
     </section>
 
-    <!-- Berita -->
     <section class="py-5 section-samar" id="berita">
         <div class="container py-4">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -340,7 +324,6 @@
                                 <div class="card-body p-4">
                                     <span class="badge bg-primary mb-2">{{ $item->kategori ?? 'Informasi' }}</span>
 
-                                    {{-- Judul dengan stretched-link & pengaman slug ?? id --}}
                                     <h5 class="fw-bold text-dark">
                                         <a href="{{ route('landing.berita.detail', $item->slug ?? $item->id) }}"
                                             class="text-decoration-none text-dark stretched-link">
@@ -366,15 +349,16 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
-    <!-- Galeri -->
+
     <section class="py-5" id="galeri">
         <div class="container py-4">
             <div class="text-center mb-5" data-aos="fade-up">
                 <span class="text-primary fw-bold">Galeri Sekolah</span>
                 <h2 class="fw-bold text-dark mb-2">Galeri Kegiatan</h2>
                 <p class="text-muted mx-auto" style="max-width: 600px;">
-                    Dokumentasi berbagai kegiatan dan aktivitas siswa SMK Arunika Teknologi.
+                    Dokumentasi berbagai kegiatan dan aktivitas siswa di sekolah.
                 </p>
             </div>
 
@@ -386,14 +370,31 @@
                             <div
                                 class="card card-galeri h-100 shadow-sm border-0 rounded-4 overflow-hidden position-relative">
 
-                                {{-- Render gambar menggunakan kolom 'file' sesuai seeder --}}
-                                @if (!empty($item->file) && trim($item->file) !== '' && strlen(trim($item->file)) > 3)
-                                    <div class="galeri-img-wrapper overflow-hidden bg-white text-center d-flex align-items-center justify-content-center"
-                                        style="height: 220px;">
-                                        <img src="{{ asset('assets/images/' . $item->file) }}"
-                                            alt="{{ $item->judul ?? 'Galeri Sekolah' }}"
-                                            class="w-100 h-100 object-fit-cover">
-                                    </div>
+                                @if (!empty($item->file) && trim($item->file) !== '')
+                                    @if ($item->kategori == 'Video')
+                                        @php
+                                            parse_str(parse_url($item->file, PHP_URL_QUERY), $my_array);
+                                            $youtubeId = $my_array['v'] ?? '';
+                                            if (
+                                                !$youtubeId &&
+                                                preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $item->file, $match)
+                                            ) {
+                                                $youtubeId = $match[1] ?? '';
+                                            }
+                                        @endphp
+                                        <div class="ratio ratio-16x9">
+                                            <iframe src="https://www.youtube.com/embed/{{ $youtubeId }}"
+                                                title="{{ $item->judul ?? 'Video Galeri' }}" allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    @else
+                                        <div class="galeri-img-wrapper overflow-hidden bg-white text-center d-flex align-items-center justify-content-center"
+                                            style="height: 220px;">
+                                            <img src="{{ asset('assets/images/' . $item->file) }}"
+                                                alt="{{ $item->judul ?? 'Galeri Sekolah' }}"
+                                                class="w-100 h-100 object-fit-cover">
+                                        </div>
+                                    @endif
                                 @endif
 
                                 <div class="card-body p-4">
@@ -429,4 +430,28 @@
             </div>
         </div>
     </section>
+
+    <section class="py-5 bg-light" id="pembuat">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Tentang Pembuat Web</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-5 col-lg-4">
+                    <div class="card border-0 shadow-sm p-4 rounded-4 bg-white">
+                        <div class="mb-3">
+                            <img src="{{ asset('assets/images/' . $pembuat['foto']) }}" alt="{{ $pembuat['nama'] }}"
+                                class="rounded-circle shadow-sm" style="width: 100px; height: 100px; object-fit: cover;">
+                        </div>
+                        <h5 class="fw-bold text-dark mb-1">{{ $pembuat['nama'] }}</h5>
+                        <p class="text-primary small fw-semibold mb-2">{{ $pembuat['kelas'] }}</p>
+                        <p class="text-muted small mb-3">
+                            {{ $pembuat['deskripsi'] }}
+                        </p>
+                        <a href="{{ route('landing.pembuat_index') }}"
+                            class="btn btn-outline-primary btn-sm rounded-pill px-3">Lihat Detail Profil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endsection

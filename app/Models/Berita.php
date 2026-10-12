@@ -31,8 +31,6 @@ class Berita extends Model
      */
     public function user()
     {
-        // 'id_user' adalah foreign key di tabel berita
-        // 'id' adalah primary key di tabel users
         return $this->belongsTo(User::class, 'id_user', 'id');
     }
 }

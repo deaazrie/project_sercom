@@ -10,7 +10,6 @@
                 <div class="card border-0 shadow-sm rounded-4">
                     <div class="card-body p-4">
 
-                        <!-- Header -->
                         <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
                             <div class="mb-2 mb-xl-0">
                                 <h3 class="font-weight-bold text-dark mb-1">
@@ -27,7 +26,7 @@
 
                         <form
                             action="{{ isset($encryptedId) ? route('admin.galeri.save', $encryptedId) : route('admin.galeri.save') }}"
-                            method="POST" enctype="multipart/form-data">
+                            method="POST">
                             @csrf
 
                             <div class="mb-3">
@@ -70,29 +69,23 @@
                                 </div>
                             </div>
 
+                            <!-- Input Tunggal Berupa Teks (Untuk Nama File Foto atau Link YouTube) -->
                             <div class="mb-3">
-                                <label for="file" class="form-label font-weight-bold">File (Foto / Video)</label>
-                                <input type="file" class="form-control @error('file') is-invalid @enderror"
-                                    id="file" name="file">
+                                <label for="file" class="form-label font-weight-bold">File (Nama File Foto atau Link YouTube)</label>
+                                <input type="text" class="form-control @error('file') is-invalid @enderror"
+                                    id="file" name="file" value="{{ old('file', $galeri->file ?? '') }}"
+                                    placeholder="Contoh Foto: gal_upacara.jpg | Contoh Video: https://www.youtube.com/watch?v=...">
                                 <small class="text-muted">
-                                    Format: Foto (jpeg, png, jpg, gif, svg) atau Video (mp4, mkv, avi). Maksimal 10MB.
+                                    Jika Foto tulis nama file di `public/assets/images/`, jika Video *paste* link YouTube lengkap di sini.
                                 </small>
                                 @error('file')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
 
-                                @if (isset($galeri) && $galeri->file)
+                                @if (isset($galeri) &&$galeri->file)
                                     <div class="mt-3">
-                                        <span class="d-block text-muted mb-1 font-weight-bold">File saat ini:</span>
-                                        @if ($galeri->kategori == 'Foto')
-                                            <img src="{{ asset('storage/' . $galeri->file) }}" alt="Preview"
-                                                width="150" class="rounded shadow-sm">
-                                        @else
-                                            <video width="250" controls class="rounded shadow-sm">
-                                                <source src="{{ asset('storage/' . $galeri->file) }}" type="video/mp4">
-                                                Browser Anda tidak mendukung tag video.
-                                            </video>
-                                        @endif
+                                        <span class="d-block text-muted mb-1 font-weight-bold">Data saat ini:</span>
+                                        <span class="badge bg-info text-dark">{{ $galeri->file }}</span>
                                     </div>
                                 @endif
                             </div>

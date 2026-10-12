@@ -5,10 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-lg-10">
 
-            <!-- Card Form -->
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body p-4">
-                      <!-- Header Halaman -->
+
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h4 class="fw-bold mb-1">
@@ -18,24 +17,19 @@
                     <p class="text-muted small mb-0">Kelola konten berita dan publikasi informasi sekolah.</p>
                 </div>
             </div>
-                    <!-- ACTION DIUBAH MENJADI ROUTE admin.berita.save -->
                     <form action="{{ isset($berita) ? route('admin.berita.save', Crypt::encrypt($berita->id)) : route('admin.berita.save') }}"
                           method="POST"
                           enctype="multipart/form-data">
                         @csrf
-                        {{-- Catatan: @method('PUT') dihapus karena controller menggunakan method POST untuk simpan & update --}}
 
                         <div class="row g-4">
-                            <!-- Kolom Kiri: Input Utama -->
                             <div class="col-md-8">
-                                <!-- Judul Berita -->
                                 <div class="mb-3">
                                     <label for="judul" class="form-label fw-semibold">Judul Berita <span class="text-danger">*</span></label>
                                     <input type="text"
                                            name="judul"
                                            id="judul"
                                            class="form-control rounded-3 @error('judul') is-invalid @enderror"
-                                           placeholder="Masukkan judul berita yang menarik..."
                                            value="{{ old('judul', $berita->judul ?? '') }}"
                                            required>
                                     @error('judul')
@@ -43,14 +37,12 @@
                                     @enderror
                                 </div>
 
-                                <!-- Isi Berita -->
                                 <div class="mb-3">
                                     <label for="isi" class="form-label fw-semibold">Isi Berita <span class="text-danger">*</span></label>
                                     <textarea name="isi"
                                               id="isi"
                                               rows="8"
                                               class="form-control rounded-3 @error('isi') is-invalid @enderror"
-                                              placeholder="Tuliskan berita secara lengkap di sini..."
                                               required>{{ old('isi', $berita->isi ?? '') }}</textarea>
                                     @error('isi')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -58,10 +50,8 @@
                                 </div>
                             </div>
 
-                            <!-- Kolom Kanan: Pengaturan & Upload -->
                             <div class="col-md-4">
                                 <div class="bg-light p-3 rounded-4 border">
-                                    <!-- Tanggal -->
                                     <div class="mb-3">
                                         <label for="tanggal" class="form-label fw-semibold">Tanggal Publikasi <span class="text-danger">*</span></label>
                                         <input type="date"
@@ -75,7 +65,6 @@
                                         @enderror
                                     </div>
 
-                                    <!-- PILIHAN STATUS PUBLIKASI -->
                                     <div class="mb-3">
                                         <label class="form-label fw-semibold">Status Publikasi <span class="text-danger">*</span></label>
                                         <div class="d-flex flex-column gap-2">
@@ -92,7 +81,6 @@
                                                 </div>
                                             </label>
 
-                                            <!-- Pilihan Public -->
                                             <label class="p-2 border rounded-3 bg-white d-flex align-items-center gap-2 cursor-pointer">
                                                 <input type="radio"
                                                        name="status"
@@ -110,7 +98,6 @@
                                         @enderror
                                     </div>
 
-                                    <!-- Upload Gambar -->
                                     <div class="mb-3">
                                         <label for="gambar" class="form-label fw-semibold">Gambar / Header Berita</label>
                                         @if(isset($berita) && $berita->gambar)

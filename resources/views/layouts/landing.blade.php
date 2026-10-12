@@ -4,16 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMK Arunika Teknologi | @yield('title')</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>{{ $profilSekolah->nama_sekolah }} | @yield('title')</title>
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-icons.min.css') }}">
+    <link rel="shortcut icon" href="{{ asset('storage/' . $profilSekolah->logo) }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('swiper/swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('aos/aos.css') }}">
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            /* padding-top: 76px; */
         }
 
         .section-samar {
@@ -158,7 +161,6 @@
             padding-bottom: 50px !important;
         }
 
-        /* === STYLE KHUSUS CARD JURUSAN === */
         .card-jurusan {
             background-color: #ffffff;
             transition: all 0.3s ease-in-out;
@@ -170,7 +172,6 @@
             box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1) !important;
         }
 
-        /* === STYLE KHUSUS CARD GURU === */
         .card-guru {
             background-color: #ffffff;
             transition: all 0.3s ease-in-out;
@@ -208,7 +209,6 @@
         .card-prestasi:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1) !important;
-            border-top: 4px solid #1e3a8a !important;
         }
 
         .prestasi-img-wrapper {
@@ -221,6 +221,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center center;
         }
 
         .ekstrakurikulerSwiper {
@@ -230,13 +231,11 @@
         .card-ekstrakurikuler {
             background-color: #ffffff;
             transition: all 0.3s ease-in-out;
-            border-top: 4px solid transparent !important;
         }
 
         .card-ekstrakurikuler:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1) !important;
-            border-top: 4px solid #1e3a8a !important;
         }
 
         .ekstrakurikuler-img-wrapper {
@@ -258,13 +257,11 @@
         .card-berita {
             background-color: #ffffff;
             transition: all 0.3s ease-in-out;
-            border-top: 4px solid transparent !important;
         }
 
         .card-berita:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1) !important;
-            border-top: 4px solid #1e3a8a !important;
         }
 
         .berita-img-wrapper {
@@ -292,7 +289,6 @@
         .card-galeri:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1) !important;
-            border-top: 4px solid #1e3a8a !important;
         }
 
         .galeri-img-wrapper {
@@ -311,7 +307,6 @@
 
 <body>
 
-    <!-- Navbar Fixed Top -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-bold" href="{{ url('/') }}">
@@ -356,78 +351,86 @@
                         <a class="nav-link {{ request()->routeIs('landing.galeri.*') ? 'active fw-bold' : '' }}"
                             href="{{ route('landing.galeri.index') }}">Galeri</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('landing.pembuat*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('landing.pembuat_index') }}">Profile Pembuat</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
     @yield('content')
 
-    <!-- Footer -->
-    <footer class="footer text-white pt-5 pb-3 mt-5" id="kontak">
+    <footer class="text-white pt-5 pb-3 mt-5" id="kontak" style="background-color: #0b1c3c;">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-5">
                     <div class="d-flex align-items-center mb-3">
                         <img src="{{ !empty($profilSekolah->logo) ? asset('storage/' . $profilSekolah->logo) : asset('assets/images/arunika.log.png') }}"
-                            width="45" height="45" class="rounded-circle me-2 object-fit-cover" alt="Logo">
+                            width="40" height="40" class="rounded-circle me-2 object-fit-cover" alt="Logo">
                         <h5 class="fw-bold mb-0 text-white">
-                            {{ $profilSekolah->nama_sekolah ?? 'SMK Arunika Teknologi' }}</h5>
+                            {{ $profilSekolah->nama_sekolah ?? 'SMK Arunika Teknologi' }}
+                        </h5>
                     </div>
                     <p class="text-white-50 mb-0">
-                        Membangun generasi yang terampil, kreatif,
-                        dan siap menghadapi dunia kerja.
+                        {{ $profilSekolah->visi ?? 'Membangun generasi yang terampil, kreatif, dan siap menghadapi dunia kerja.' }}
                     </p>
                 </div>
 
                 <div class="col-md-3">
-                    <h6 class="fw-bold mb-3">Menu</h6>
-                    <div class="d-flex flex-column gap-2">
-                        <a href="#" class="text-white-50 text-decoration-none">Beranda</a>
-                        <a href="#sambutan" class="text-white-50 text-decoration-none">Profil</a>
-                        <a href="#jurusan" class="text-white-50 text-decoration-none">Program Keahlian</a>
-                        <a href="#guru" class="text-white-50 text-decoration-none">Guru</a>
+                    <h6 class="fw-bold mb-3 text-white">Menu Navigasi</h6>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled d-flex flex-column gap-2 small">
+                                <li><a href="{{ url('/') }}"
+                                        class="text-white-50 text-decoration-none">Beranda</a></li>
+                                <li><a href="{{ url('/#sambutan') }}"
+                                        class="text-white-50 text-decoration-none">Profil</a></li>
+                                <li><a href="{{ url('/#jurusan') }}"
+                                        class="text-white-50 text-decoration-none">Program</a></li>
+                                <li><a href="{{ url('/#guru') }}" class="text-white-50 text-decoration-none">Guru</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled d-flex flex-column gap-2 small">
+                                <li><a href="{{ url('/#prestasi') }}"
+                                        class="text-white-50 text-decoration-none">Prestasi</a></li>
+                                <li><a href="{{ url('/#ekstrakurikuler') }}"
+                                        class="text-white-50 text-decoration-none">Eskul</a></li>
+                                <li><a href="{{ url('/#berita') }}"
+                                        class="text-white-50 text-decoration-none">Berita</a></li>
+                                <li><a href="{{ url('/#galeri') }}"
+                                        class="text-white-50 text-decoration-none">Galeri</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <h6 class="fw-bold mb-3">Hubungi Kami</h6>
-                    <p class="text-white-50 mb-2">
+                    <h6 class="fw-bold mb-3 text-white">Hubungi Kami</h6>
+                    <p class="text-white-50 small mb-2">
                         <i class="bi bi-geo-alt me-2"></i>
-                        Jl. Pendidikan No. 10, Indonesia
+                        {{ $profilSekolah->alamat }}
                     </p>
-                    <p class="text-white-50 mb-2">
+                    <p class="text-white-50 small mb-3">
                         <i class="bi bi-telephone me-2"></i>
-                        (022) 1234567
+                        {{ $profilSekolah->kontak }}
                     </p>
-                    <p class="text-white-50 mb-3">
-                        <i class="bi bi-envelope me-2"></i>
-                        info@arunikateknologi.sch.id
-                    </p>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="text-white fs-5">
-                            <i class="bi bi-instagram"></i>
-                        </a>
-                        <a href="#" class="text-white fs-5">
-                            <i class="bi bi-tiktok"></i>
-                        </a>
-                        <a href="#" class="text-white fs-5">
-                            <i class="bi bi-facebook"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
 
-            <hr class="border-light opacity-25 my-4">
+            <hr class="border-secondary my-4">
+
             <div class="text-center">
-                <p class="text-white-50 mb-0">
-                    © {{ date('Y') }} SMK Arunika Teknologi
+                <p class="text-white-50 small mb-0">
+                    &copy; {{ date('Y') }} {{ $profilSekolah->nama_sekolah }}. All rights reserved.
                 </p>
             </div>
         </div>
     </footer>
-
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('aos/aos.js') }}"></script>
 

@@ -5,9 +5,9 @@
         <div class="container py-4">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <!-- Kategori & Tanggal -->
                     <div class="mb-3">
-                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-1">
+                        <span
+                            class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-1">
                             {{ $berita->kategori ?? 'Informasi' }}
                         </span>
                         <span class="text-muted small ms-3">
@@ -16,22 +16,20 @@
                         </span>
                     </div>
 
-                    <!-- Judul Berita -->
                     <h1 class="fw-bold text-dark mb-4">{{ $berita->judul }}</h1>
-
-                    <!-- Gambar Berita -->
                     @if (!empty($berita->gambar))
-                        <div class="mb-4 rounded-4 overflow-hidden shadow-sm" style="max-height: 400px;">
-                            <img src="{{ asset('assets/images/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="w-100 object-fit-cover">
+                        <div class="text-center mb-4">
+                            <div class="rounded-4 overflow-hidden shadow-sm mx-auto"
+                                style="width: 100%; max-width: 828px; height: 380px;">
+                                <img src="{{ asset('assets/images/' . $berita->gambar) }}" alt="{{ $berita->judul }}"
+                                    class="w-100 h-100 object-fit-cover" style="object-position: center center;">
+                            </div>
                         </div>
                     @endif
-
-                    <!-- Isi Berita -->
                     <div class="text-secondary content-berita mb-5" style="line-height: 1.8;">
-                        {!! $berita->isi !!}
+                       {{ strip_tags($berita->isi) }}
                     </div>
 
-                    <!-- Tombol Kembali (Dinamis Mengikuti Halaman Sebelumnya) -->
                     <div class="text-start border-top pt-4">
                         <a href="{{ url()->previous() }}" class="btn btn-outline-secondary rounded-pill px-4 py-2">
                             <i class="bi bi-arrow-left me-2"></i> Kembali

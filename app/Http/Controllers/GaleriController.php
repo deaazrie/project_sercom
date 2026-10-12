@@ -35,20 +35,6 @@ class GaleriController extends Controller
     return view('admin.galeri.index', compact('galeri', 'listKategori'));
 }
 
-    //    public function index(Request $request)
-    // {
-    //     $title = 'galeri';
-    //     $search = $request->input('search');
-
-    //     // Pencarian berdasarkan nama_guru atau nip
-    //     $galeri = Galeri::when($search, function ($query, $search) {
-    //                 return $query->where('judul', 'LIKE', "%{$search}%")
-    //                              ->orWhere('keterangan', 'LIKE', "%{$search}%");
-    //             })->latest()->paginate(10);
-
-    //     return view('admin.galeri.index', compact('galeri', 'title'));
-    // }
-
     public function addEdit($id = null)
     {
         $galeri = null;
@@ -66,7 +52,7 @@ class GaleriController extends Controller
         return view('admin.galeri.add-edit', compact('galeri', 'encryptedId'));
     }
 
-    public function save(Request $request, $id = null)
+   public function save(Request $request, $id = null)
     {
         $decryptedId = null;
         if ($id) {
@@ -80,16 +66,15 @@ class GaleriController extends Controller
         $request->validate([
             'judul'      => 'required|string|max:255|unique:galeri,judul,' . ($decryptedId ?? 'NULL') . ',id',
             'keterangan' => 'required|string',
-            'file'       => ($decryptedId ? 'nullable' : 'required') . '|file|mimes:jpeg,png,jpg,gif,svg,mp4,mkv,avi|max:10240',
+            'file'       => ($decryptedId ? 'nullable' : 'required') . '|string', // Diubah menjadi string karena berupa teks / link
             'kategori'   => 'required|in:Foto,Video',
             'tanggal'    => 'required|date',
         ], [
             'judul.required'      => 'Judul galeri wajib diisi.',
             'judul.unique'        => 'Judul galeri sudah terdaftar.',
             'keterangan.required' => 'Keterangan wajib diisi.',
-            'file.required'       => 'File galeri wajib diunggah.',
-            'file.mimes'          => 'Format file harus berupa gambar atau video.',
-            'file.max'            => 'Ukuran file maksimal 10MB.',
+            'file.required'       => 'File atau link YouTube wajib diisi.',
+            'file.string'         => 'Format file harus berupa teks atau link yang valid.',
             'kategori.required'   => 'Kategori wajib dipilih.',
             'tanggal.required'    => 'Tanggal wajib diisi.',
         ]);
@@ -100,11 +85,13 @@ class GaleriController extends Controller
         $galeri->kategori   = $request->kategori;
         $galeri->tanggal    = $request->tanggal;
 
-        if ($request->hasFile('file')) {
+        if ($request->filled('file')) {
+
             if ($decryptedId && $galeri->file && Storage::disk('public')->exists($galeri->file)) {
                 Storage::disk('public')->delete($galeri->file);
             }
-            $galeri->file = $request->file('file')->store('galeri', 'public');
+
+            $galeri->file = $request->file;
         }
 
         $galeri->save();

@@ -6,7 +6,6 @@
         <div class="card shadow-sm border">
             <div class="card-body">
 
-                <!-- Header Card -->
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
                     <div>
                         <h4 class="card-title mb-1">Kelola Pengguna</h4>
@@ -20,7 +19,6 @@
                     </div>
                 </div>
 
-                <!-- Tabel Data -->
                 <div class="table-responsive">
                     <table class="table table-striped align-middle">
                         <thead>
@@ -58,17 +56,14 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-1">
-                                            <!-- Tombol Detail dengan Icon -->
                                             <a href="{{ route('admin.user.detail', Crypt::encrypt($item->id)) }}"
                                                 class="btn btn-info btn-sm text-white" title="Detail">
                                                 <i class="mdi mdi-eye"></i> Detail
                                             </a>
-                                            <!-- Tombol Edit dengan Icon -->
                                             <a href="{{ route('admin.user.add-edit', Crypt::encrypt($item->id)) }}"
                                                 class="btn btn-warning btn-sm text-white" title="Edit">
                                                 <i class="mdi mdi-pencil"></i> Edit
                                             </a>
-                                            <!-- Tombol Hapus dengan Icon -->
                                             <form action="{{ route('admin.user.delete', Crypt::encrypt($item->id)) }}"
                                                 method="POST" class="d-inline"
                                                 onsubmit="return confirm('Yakin ingin menghapus pengguna ini?')">

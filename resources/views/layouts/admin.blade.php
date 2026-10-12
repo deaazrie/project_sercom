@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>SMK Arunika Teknologi | @yield('title')</title>
-    <!-- plugins:css -->
+    <title>{{ $profilSekolah->nama_sekolah }} | @yield('title')</title>
+
     <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
@@ -14,24 +13,13 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <!-- endinject -->
 
-    <!-- Plugin CSS DataTables Bootstrap 5 (CDN Resmi) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!-- endinject -->
-    {{-- <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" /> --}}
-
-    {{-- <link rel="shortcut icon" href="{{ asset('storage/' . \App\Models\ProfilSekolah::first()?->logo) }}" type="image/png"> --}}
-    <link rel="shortcut icon"
-        href="{{ asset('storage/' . \Illuminate\Support\Facades\DB::table('profil_sekolah')->first()?->logo) }}"
-        type="image/png">
+    <link rel="shortcut icon" href="{{ asset('storage/' . $profilSekolah->logo) }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
-        /* --- TAMPILAN DESKTOP / LAPTOP --- */
         @media (min-width: 992px) {
             .main-panel {
                 margin-left: 260px;
@@ -52,7 +40,6 @@
             }
         }
 
-        /* --- TAMPILAN HP / TABLET (Layar Kecil) --- */
         @media (max-width: 991.98px) {
             .main-panel {
                 margin-left: 0 !important;
@@ -62,7 +49,6 @@
                 flex-direction: column;
             }
 
-            /* Sidebar full mentok dari atas sampai bawah layar */
             .sidebar {
                 position: fixed !important;
                 top: 0 !important;
@@ -77,7 +63,6 @@
                 background: #ffffff !important;
             }
 
-            /* Saat sidebar aktif / terbuka */
             .sidebar.active,
             .sidebar.open,
             .active.sidebar {
@@ -89,7 +74,6 @@
             }
         }
 
-        /* --- PENGATURAN UMUM --- */
         .main-panel>.navbar {
             position: relative !important;
             top: auto !important;
@@ -111,7 +95,6 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* --- ATUR JARAK LOGO KE MENU --- */
         .sidebar .sidebar-brand,
         .sidebar .brand-logo {
             padding-top: 15px !important;
@@ -121,7 +104,6 @@
 
         .sidebar .sidebar-brand img {
             max-height: 40px !important;
-            /* Sesuaikan ukuran tingginya jika masih terlalu besar */
         }
     </style>
 </head>
@@ -130,18 +112,7 @@
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper p-0">
 
-            <!-- SIDEBAR -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
-
-                {{-- @php
-                    $profilFavicon = \App\Models\ProfilSekolah::first();
-                @endphp
-
-                @if ($profilFavicon && $profilFavicon->logo)
-                    <link rel="shortcut icon" href="{{ asset('storage/' . $profilFavicon->logo) }}" type="image/x-icon">
-                @else
-                    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
-                @endif --}}
 
                 <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center px-3 pt-3 pb-2"
                     style="background: transparent; height: auto; border-bottom: 1px solid rgba(0, 0, 0, 0.06); margin-bottom: 15px;">
@@ -149,14 +120,12 @@
                     <a class="navbar-brand brand-logo m-0 p-0 text-decoration-none d-flex flex-column align-items-center text-center"
                         href="{{ route('admin.dashboard') }}" style="width: 100%;">
 
-                        <!-- LOGO SEKOLAH -->
                         <div class="mb-2">
                             <img src="{{ !empty($profilSekolah->logo) ? asset('storage/' . $profilSekolah->logo) : asset('assets/images/logo.png') }}"
                                 alt="Logo"
                                 style="width: 55px; height: 55px; object-fit: contain; filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.1));" />
                         </div>
 
-                        <!-- NAMA SEKOLAH -->
                         <div style="line-height: 1.3; width: 100%;">
                             <span class="d-block fw-bold text-dark"
                                 style="font-size: 13px; font-family: 'Segoe UI', sans-serif; white-space: normal; word-wrap: break-word;">
@@ -167,7 +136,6 @@
                                 Panel Administrator
                             </span>
                         </div>
-
                     </a>
                 </div>
 
@@ -185,6 +153,7 @@
                             <span class="menu-title">Profile Sekolah</span>
                         </a>
                     </li>
+
                     @if (auth()->check() && auth()->user()->role == 'admin')
                         <li class="nav-item {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('admin.user.index') }}">
@@ -193,6 +162,8 @@
                             </a>
                         </li>
                     @endif
+
+                    <li class="nav-item nav-category"><span class="nav-link">Manajemen Sekolah</span></li>
 
                     <li class="nav-item {{ request()->routeIs('admin.guru*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.guru.index') }}">
@@ -215,7 +186,6 @@
                         </a>
                     </li>
 
-                    <!-- Menu Kelola Prestasi -->
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('admin/prestasi*') ? 'active' : '' }}"
                             href="{{ route('admin.prestasi.index') }}">
@@ -223,6 +193,8 @@
                             <span class="menu-title">Kelola Prestasi</span>
                         </a>
                     </li>
+
+                    <li class="nav-item nav-category"><span class="nav-link">Publikasi & Media</span></li>
 
                     <li class="nav-item {{ request()->routeIs('admin.berita*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.berita.index') }}">
@@ -234,7 +206,7 @@
                     <li class="nav-item {{ request()->routeIs('admin.ekstrakurikuler*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.ekstrakurikuler.index') }}">
                             <i class="fa-solid fa-people-group menu-icon"></i>
-                            <span class="menu-title">Kelola Ekstrakurikuler</span>
+                            <span class="menu-title">Ekstrakurikuler</span>
                         </a>
                     </li>
 
@@ -247,9 +219,7 @@
                 </ul>
             </nav>
 
-            <!-- MAIN PANEL -->
             <div class="main-panel">
-                <!-- NAVBAR -->
                 <nav class="navbar col-lg-12 col-12 p-0 d-flex flex-row">
                     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between w-100 px-4">
                         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
@@ -260,12 +230,10 @@
                         <ul class="navbar-nav navbar-nav-right mb-0 align-items-center flex-row gap-3">
                             <li class="nav-item nav-profile dropdown d-flex align-items-center gap-2">
                                 <div class="d-flex align-items-center gap-2">
-                                    {{-- <img src="{{ asset('assets/images/faces/face28.jpg') }}" alt="profile"
-                                        class="rounded-circle shadow-sm border" width="38" height="38"
-                                        style="object-fit: cover;" /> --}}<img
-                                        src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name ?? 'Admin') }}&background=0D8ABC&color=fff&size=128"
-                                        alt="profile" class="rounded-circle shadow-sm border" width="38"
-                                        height="38" style="object-fit: cover;" />
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow-sm"
+                                        style="width: 38px; height: 38px; font-size: 16px; font-weight: bold; flex-shrink: 0;">
+                                        {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
+                                    </div>
 
                                     <span class="font-weight-bold text-dark d-none d-md-inline-block"
                                         style="font-size: 14px;">
@@ -280,28 +248,28 @@
 
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown shadow-sm border-0 rounded-4 mt-2 py-2"
                                     aria-labelledby="profileDropdown" style="min-width: 170px;">
+
                                     <a class="dropdown-item py-2 px-3 text-dark d-flex align-items-center"
                                         href="{{ route('admin.settings.profile') }}">
                                         <i class="ti-user text-primary me-2"></i> Profil Pengguna
                                     </a>
-                                    <div class="dropdown-divider my-1"></div>
-                                    <a class="dropdown-item py-2 px-3 text-danger d-flex align-items-center"
-                                        href="#"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="ti-power-off text-danger me-2"></i> Logout
-                                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
+                                    <div class="dropdown-divider my-1"></div>
+
+                                    <form action="{{ route('logout') }}" method="POST" class="m-0 p-0">
                                         @csrf
+                                        <button type="submit"
+                                            class="dropdown-item py-2 px-3 text-danger d-flex align-items-center border-0 bg-transparent w-100">
+                                            <i class="ti-power-off text-danger me-2"></i> Logout
+                                        </button>
                                     </form>
+
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </nav>
 
-                <!-- SCROLLABLE CONTAINER -->
                 <div class="scrollable-container">
                     <div class="content-wrapper">
                         @if (session('success'))
@@ -323,11 +291,12 @@
                         @yield('content')
                     </div>
 
-                    <!-- FOOTER -->
                     <footer class="footer mt-auto">
                         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright ©
-                                2026. SMK Arunika Teknologi. All rights reserved.</span>
+                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
+                                Copyright © {{ date('Y') }}.
+                                {{ $profilSekolah->nama_sekolah ?? 'SMK Arunika Teknologi' }}. All rights reserved.
+                            </span>
                             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Menerangi Masa
                                 Depan dengan
                                 Kompetensi <i class="ti-heart text-danger ms-1"></i></span>
@@ -366,7 +335,6 @@
         $.fn.dataTable.ext.errMode = 'none';
     </script>
 
-    <!-- Script Kontrol Hamburger -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -382,5 +350,4 @@
         });
     </script>
 </body>
-
 </html>

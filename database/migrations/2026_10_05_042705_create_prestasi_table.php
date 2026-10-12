@@ -19,7 +19,6 @@ return new class extends Migration
             $table->enum('tingkat', ['Sekolah', 'Kecamatan', 'Kabupaten/Kota', 'Provinsi', 'Nasional', 'Internasional']);
             $table->string('juara', 50);
             $table->year('tahun');
-            // $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,6 @@
 <section class="py-5 bg-light mt-4">
     <div class="container py-4" style="max-width: 800px;">
 
-        {{-- Card Detail Jurusan --}}
         <div class="card border-0 shadow-sm rounded-4 overflow-hidden p-4 mb-4">
             @if(!empty($jurusan->gambar))
                 <div class="mb-4 rounded-3 overflow-hidden">
@@ -33,7 +32,6 @@
             </div>
         </div>
 
-        {{-- Tombol Kembali di Bawah --}}
         <div>
             <a href="{{ url()->previous() }}" class="btn btn-outline-secondary rounded-pill px-4 py-2">
                 <i class="bi bi-arrow-left me-2"></i> Kembali

@@ -26,20 +26,7 @@ class GuruController extends Controller
 
         return view('admin.guru.index', compact('guru', 'title'));
     }
-    
-    // public function index(Request $request)
-    // {
-    //     $title = 'guru';
-    //     $search = $request->input('search');
 
-    //     // Pencarian berdasarkan nama_guru atau nip
-    //     $guru = Guru::when($search, function ($query, $search) {
-    //                 return $query->where('nama_guru', 'LIKE', "%{$search}%")
-    //                              ->orWhere('nip', 'LIKE', "%{$search}%");
-    //             })->latest()->paginate(10);
-
-    //     return view('admin.guru.index', compact('guru', 'title'));
-    // }
 
     /**
      * Form Tambah / Edit Guru
@@ -101,11 +88,8 @@ class GuruController extends Controller
         $guru->nama_guru = $request->nama_guru;
         $guru->nip       = $request->nip;
         $guru->mapel     = $request->mapel;
-
-        // --- INI BAGIAN PENTING YANG KETINGGALAN SEBELUMNYA ---
         $guru->kategori  = $request->kategori;
 
-        // Upload / Replace Foto
         if ($request->hasFile('foto')) {
             if ($guru->foto && Storage::disk('public')->exists($guru->foto)) {
                 Storage::disk('public')->delete($guru->foto);

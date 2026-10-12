@@ -18,12 +18,10 @@ class BeritaController extends Controller
     {
         $query = Berita::with('user');
 
-        // Filter berdasarkan Tahun jika dipilih
         if ($request->filled('tahun')) {
             $query->whereYear('created_at', $request->tahun);
         }
 
-        // Ambil daftar tahun unik dari data berita
         $listTahun = Berita::selectRaw('YEAR(created_at) as tahun')->distinct()->orderBy('tahun', 'desc')->pluck('tahun');
 
         $berita = $query->latest()->get();
@@ -31,9 +29,7 @@ class BeritaController extends Controller
         return view('admin.berita.index', compact('berita', 'listTahun'));
     }
 
-    /**
-     * Form Tambah / Edit Berita
-     */
+ 
     public function addEdit($id = null)
     {
         $berita = null;
@@ -42,6 +38,11 @@ class BeritaController extends Controller
             try {
                 $decryptedId = Crypt::decrypt($id);
                 $berita = Berita::findOrFail($decryptedId);
+
+                if (auth()->user()->role !== 'admin' && $berita->id_user !== auth()->id()) {
+                    abort(403, 'Anda tidak memiliki hak akses untuk mengedit berita ini.');
+                }
+
             } catch (\Exception $e) {
                 return redirect()
                     ->route('admin.berita.index')
@@ -52,9 +53,6 @@ class BeritaController extends Controller
         return view('admin.berita.add-edit', compact('berita'));
     }
 
-    /**
-     * Simpan Data Berita (Create & Update)
-     */
     public function save(Request $request, $id = null)
     {
         $decryptedId = null;
@@ -72,7 +70,6 @@ class BeritaController extends Controller
             $berita = new Berita();
         }
 
-        // Validasi Input
         $request->validate([
             'judul'   => 'required|string|max:255',
             'isi'     => 'required|string',
@@ -89,14 +86,27 @@ class BeritaController extends Controller
             'gambar.max'       => 'Ukuran gambar maksimal 2MB.',
         ]);
 
+        $slug = Str::slug($request->judul);
+        $slugExists = Berita::where('slug', $slug)
+            ->when($decryptedId, function ($query) use ($decryptedId) {
+                return $query->where('id', '!=', $decryptedId);
+            })
+            ->exists();
+
+        if ($slugExists) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Judul berita ini menghasilkan URL/slug yang sudah ada. Silakan gunakan judul yang berbeda.');
+        }
+
         $berita->judul   = $request->judul;
-        $berita->slug    = Str::slug($request->judul); // <-- GENERATE SLUG OTOMATIS DI SINI
+        $berita->slug    = $slug;
         $berita->isi     = $request->isi;
         $berita->tanggal = $request->tanggal;
         $berita->status  = $request->status;
         $berita->id_user = Auth::id() ?? 1;
 
-        // Upload / Replace Gambar
         if ($request->hasFile('gambar')) {
             if ($berita->gambar && Storage::disk('public')->exists($berita->gambar)) {
                 Storage::disk('public')->delete($berita->gambar);
@@ -115,14 +125,10 @@ class BeritaController extends Controller
                     : 'Data berita berhasil disimpan.'
             );
     }
-
-    /**
-     * Display the specified resource.
-     */
+ 
     public function show($slug)
     {
         try {
-            // Mencari berita berdasarkan slug alih-alih ID terenkripsi
             $berita = Berita::with('user')->where('slug', $slug)->firstOrFail();
         } catch (\Exception $e) {
             return redirect()
@@ -133,9 +139,6 @@ class BeritaController extends Controller
         return view('admin.berita.detail', compact('berita'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         try {
@@ -145,6 +148,10 @@ class BeritaController extends Controller
             return redirect()
                 ->route('admin.berita.index')
                 ->with('error', 'Data berita tidak ditemukan.');
+        }
+
+        if (auth()->user()->role !== 'admin' && $berita->id_user !== auth()->id()) {
+            abort(403, 'Anda tidak memiliki hak akses untuk menghapus berita ini.');
         }
 
         if ($berita->gambar && Storage::disk('public')->exists($berita->gambar)) {

@@ -88,7 +88,6 @@ class UserController extends Controller
             'status.required'   => 'Pilih status pengguna.',
         ]);
 
-        // Masukkan data ke model
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
@@ -147,8 +146,6 @@ class UserController extends Controller
                 ->with('error', 'Data pengguna tidak ditemukan.');
         }
 
-        // Logika pengaman: Kalau operator sudah punya relasi (misal input berita), blokir hapus
-        // Ganti 'beritas' dengan nama relasi di model User Anda jika ada
         if (method_exists($user, 'beritas') && $user->beritas()->count() > 0) {
             return redirect()
                 ->route('admin.user.index')

@@ -1,14 +1,12 @@
 @extends('layouts.admin')
 @section('title', 'Data Berita')
 
-
 @section('content')
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card shadow-sm border-0 rounded-4 w-100">
                 <div class="card-body">
 
-                    <!-- Header Halaman -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <h4 class="card-title fw-bold mb-1">Data Berita</h4>
@@ -22,11 +20,9 @@
                         </div>
                     </div>
 
-                    <!-- Form Filter Inline Minimalis -->
                     <form method="GET" action="{{ route('admin.berita.index') }}"
                         class="d-flex align-items-center flex-wrap gap-3 mb-4">
 
-                        <!-- Filter Tahun -->
                         <div class="d-flex align-items-center gap-2">
                             <label for="tahun" class="text-secondary small mb-0 text-nowrap"
                                 style="font-weight: 500;">Filter Tahun:</label>
@@ -40,7 +36,6 @@
                             </select>
                         </div>
 
-                        <!-- Tombol Reset -->
                         <div>
                             <a href="{{ route('admin.berita.index') }}" class="btn btn-outline-secondary btn-sm px-3">
                                 <i class="mdi mdi-refresh"></i> Reset
@@ -49,7 +44,6 @@
 
                     </form>
 
-                    <!-- Tabel Data Berita -->
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0">
                             <thead class="bg-light">
@@ -79,9 +73,8 @@
                                         <td class="fw-semibold text-dark">{{ $item->judul }}</td>
                                         <td class="text-muted">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}
                                         </td>
-                                        <td class="text-muted">{{ $item->penulis ?? 'Admin Sekolah' }}</td>
+                                        <td class="text-muted">{{ $item->user->name ?? ($item->penulis ?? 'Admin Sekolah') }}</td>
 
-                                        <!-- BADGE STATUS -->
                                         <td>
                                             @if ($item->status == 'public')
                                                 <span
@@ -94,11 +87,8 @@
                                             @endif
                                         </td>
 
-                                        <!-- TOMBOL AKSI -->
-                                        <!-- TOMBOL AKSI -->
                                         <td class="text-center">
                                             <div class="btn-aksi-group" role="group">
-                                                <!-- UBAH INI: Menggunakan $item->slug untuk detail -->
                                                 <a href="{{ route('admin.berita.detail', $item->slug ?? $item->id) }}"
                                                     class="btn btn-info btn-sm text-white" title="Detail Berita"
                                                     aria-label="Detail Berita">
@@ -106,27 +96,27 @@
                                                         class="d-none d-md-inline ms-1">Detail</span>
                                                 </a>
 
-                                                <!-- Edit tetap menggunakan enkripsi ID sesuai struktur -->
-                                                <a href="{{ route('admin.berita.add-edit', Crypt::encrypt($item->id)) }}"
-                                                    class="btn btn-warning btn-sm text-white" title="Edit Berita"
-                                                    aria-label="Edit Berita">
-                                                    <i class="mdi mdi-pencil"></i> <span
-                                                        class="d-none d-md-inline ms-1">Edit</span>
-                                                </a>
+                                                @if (auth()->user()->role === 'admin' || $item->id_user === auth()->id())
+                                                    <a href="{{ route('admin.berita.add-edit', Crypt::encrypt($item->id)) }}"
+                                                        class="btn btn-warning btn-sm text-white" title="Edit Berita"
+                                                        aria-label="Edit Berita">
+                                                        <i class="mdi mdi-pencil"></i> <span
+                                                            class="d-none d-md-inline ms-1">Edit</span>
+                                                    </a>
 
-                                                <!-- Hapus tetap menggunakan enkripsi ID sesuai struktur -->
-                                                <form
-                                                    action="{{ route('admin.berita.delete', Crypt::encrypt($item->id)) }}"
-                                                    method="POST" class="d-inline"
-                                                    onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                        title="Hapus Berita" aria-label="Hapus Berita">
-                                                        <i class="mdi mdi-delete"></i> <span
-                                                            class="d-none d-md-inline ms-1">Hapus</span>
-                                                    </button>
-                                                </form>
+                                                    <form
+                                                        action="{{ route('admin.berita.delete', Crypt::encrypt($item->id)) }}"
+                                                        method="POST" class="d-inline"
+                                                        onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                            title="Hapus Berita" aria-label="Hapus Berita">
+                                                            <i class="mdi mdi-delete"></i> <span
+                                                                class="d-none d-md-inline ms-1">Hapus</span>
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
@@ -141,13 +131,6 @@
                             </tbody>
                         </table>
                     </div>
-
-                    {{-- <!-- Pagination -->
-                    @if (method_exists($berita, 'links'))
-                        <div class="mt-4 d-flex justify-content-end">
-                            {{ $berita->links() }}
-                        </div>
-                    @endif --}}
 
                 </div>
             </div>

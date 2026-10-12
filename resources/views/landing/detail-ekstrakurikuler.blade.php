@@ -4,17 +4,14 @@
     <section class="py-5 bg-light mt-4">
         <div class="container py-4" style="max-width: 900px;">
 
-            <!-- Tombol Kembali -->
             <div class="mb-4">
                 <a href="{{ url()->previous() }}" class="btn btn-outline-secondary rounded-pill px-4 py-2 shadow-sm">
                     <i class="bi bi-arrow-left me-2"></i> Kembali
                 </a>
             </div>
 
-            <!-- Card Utama ala Admin Detail -->
             <div class="card shadow-sm border-0 rounded-4 overflow-hidden bg-white p-4 p-lg-5">
 
-                <!-- Header Info -->
                 <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
                     <div class="bg-primary-subtle text-primary rounded-3 p-3 me-3">
                         <i class="bi bi-info-circle fs-4"></i>
@@ -25,7 +22,6 @@
                     </div>
                 </div>
 
-                <!-- Foto Ekstrakurikuler (Jika Ada) -->
                 @if (
                     !empty($ekstrakurikuler->gambar) &&
                         trim($ekstrakurikuler->gambar) !== '' &&
@@ -40,7 +36,6 @@
                     </div>
                 @endif
 
-                <!-- Tabel Informasi Detail (Lengkap dengan Pembina) -->
                 <div class="card border-0 bg-light rounded-4 p-4">
                     <div class="table-responsive">
                         <table class="table table-borderless align-middle mb-0">

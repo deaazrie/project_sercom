@@ -37,7 +37,6 @@
                             </select>
                         </div>
 
-                        <!-- Tombol Reset -->
                         <div>
                             <a href="{{ route('admin.galeri.index') }}" class="btn btn-outline-secondary btn-sm px-3">
                                 <i class="mdi mdi-refresh"></i> Reset
@@ -46,7 +45,6 @@
 
                     </form>
 
-                    <!-- Tabel Data Galeri -->
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0">
                             <thead class="bg-light">
@@ -91,7 +89,6 @@
                                         <td class="text-muted">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}
                                         </td>
 
-                                        <!-- TOMBOL AKSI -->
                                         <td class="text-center">
                                             <div class="d-flex justify-content-center gap-1" role="group">
                                                 <a href="{{ route('admin.galeri.detail', Crypt::encrypt($item->id)) }}"
@@ -132,14 +129,6 @@
                             </tbody>
                         </table>
                     </div>
-
-                    {{-- <!-- Pagination -->
-                @if (method_exists($galeri, 'links'))
-                    <div class="mt-4 d-flex justify-content-end">
-                        {{ $galeri->appends(request()->query())->links() }}
-                    </div>
-                @endif --}}
-
                 </div>
             </div>
         </div>

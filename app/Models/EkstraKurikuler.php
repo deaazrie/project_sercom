@@ -11,8 +11,6 @@ class Ekstrakurikuler extends Model
 
     protected $table = 'ekstrakurikuler';
 
-    // Baris primaryKey dihapus saja karena 'id' adalah default Laravel
-
     protected $fillable = [
         'nama_ekskul',
         'guru_id',
